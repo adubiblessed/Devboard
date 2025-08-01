@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevBoard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-bg': '#1a1a1a',
+                        'card-bg': '#2a2a2a',
+                        'border-gray': '#404040'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-bg text-white min-h-screen">
+    {{ block content }}
+    <!-- ===== NAVIGATION HEADER START ===== -->
+        {% include 'base/navbar.html' %}
+    <!-- ===== NAVIGATION HEADER END ===== -->
+
+    <div class="container mx-auto px-6 py-8">
+        <!-- ===== MAIN CONTENT GRID START ===== -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- ===== LEFT COLUMN START ===== -->
+            <div class="space-y-8">
+                
+                <!-- ===== PROJECTS SECTION START ===== -->
+                {% include 'base/project.html' %}
+                <!-- ===== PROJECTS SECTION END ===== -->
+                
+                <!-- ===== GOALS AND TASKS SECTION START ===== -->
+                    {% include 'base/tasks.html' %}
+                <!-- ===== GOALS AND TASKS SECTION END ===== -->
+                
+            </div>
+            <!-- ===== LEFT COLUMN END ===== -->
+            
+            <!-- ===== RIGHT COLUMN START ===== -->
+            <div class="space-y-8">
+                
+                <!-- ===== NOTES SECTION START ===== -->
+                    {% include 'base/notes.html' %}
+                <!-- ===== NOTES SECTION END ===== -->
+                
+                <!-- ===== PRODUCTIVITY AND STREAK SECTION START ===== -->
+                    {% include 'base/productivity.html' %}
+                <!-- ===== PRODUCTIVITY AND STREAK SECTION END ===== -->
+                
+                <!-- ===== SNIPPETS SECTION START ===== -->
+                    {% include 'base/snippet.html' %}
+                <!-- ===== SNIPPETS SECTION END ===== -->
+                
+            </div>
+            <!-- ===== RIGHT COLUMN END ===== -->
+            
+        </div>
+        <!-- ===== MAIN CONTENT GRID END ===== -->
+    </div>
+    {% endblock content%}
+</body>
+</html>

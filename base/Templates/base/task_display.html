@@ -1,0 +1,20 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+
+{% if tasks %}
+    <h2>Tasks</h2>
+    {% for task in tasks %}
+        <div>
+            <p>Title: {{ task.title }}</p>
+            <p>Description: {{ task.description }}</p>
+            <p>Status: {{ task.status }}</p>
+            <p>Created At: {{ task.created_at }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No tasks available.</p>
+{% endif %}
+
+{% endblock content %}
