@@ -20,7 +20,7 @@
     </script>
 </head>
 <body class="bg-dark-bg text-white min-h-screen">
-    
+    {% block content %}
     <!-- ===== NAVIGATION HEADER START ===== -->
         {% include 'base/navbar.html' %}
     <!-- ===== NAVIGATION HEADER END ===== -->
@@ -64,6 +64,6 @@
         </div>
         <!-- ===== MAIN CONTENT GRID END ===== -->
     </div>
-    
+    {% endblock content%}
 </body>
 </html>

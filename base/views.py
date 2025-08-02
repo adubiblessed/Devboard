@@ -2,11 +2,20 @@ from django.shortcuts import render,redirect
 
 from .forms import UserForm, LoginForm
 from .models import User
+from taskmanage.models import Task
 
 # Create your views here.
 
 def home (request): 
-    return render(request, 'base/main.html')
+    tasks = Task.objects.all()
+    total_tasks = tasks.count()
+    completed_tasks = tasks.filter(completed=True).count()
+
+    if total_tasks == 0:
+        percent_complete = 0
+    else:
+        percent_complete = int((completed_tasks / total_tasks) * 100)
+    return render(request, 'base/main.html',{'tasks': tasks, 'percent_complete': percent_complete})
 
 
 

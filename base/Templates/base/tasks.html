@@ -1,41 +1,47 @@
-<div class="bg-card-bg rounded-lg p-6">
-  <h2 class="text-xl font-semibold mb-6">Goals & Tasks</h2>
+<!-- ===== GOALS AND TASKS SECTION START ===== -->
+<div class="container mx-auto max-w-4xl ">
+  <div class="bg-card-bg rounded-lg p-6 ">
+    {% if tasks %}
+      <h2 class="text-xl font-semibold mb-6 text-white">Goals & Tasks</h2>
 
-  <div class="mb-6">
-    <div class="flex items-center justify-between mb-2">
-      <span class="font-medium">April 2024 Goals</span>
-      <span class="text-gray-400">50%</span>
-    </div>
-    <div class="w-full bg-gray-700 rounded-full h-2">
-      <div class="bg-blue-500 h-2 rounded-full" style="width: 50%"></div>
-    </div>
-  </div>
+      <!-- ===== PROGRESS BAR START ===== -->
+      <div class="mb-6">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-medium text-white">April 2024 Goals</span>
+          <span class="text-gray-400">{{percent_complete}}%</span>
+        </div>
+        <div class="w-full bg-gray-700 rounded-full h-2">
+          <div class="bg-blue-500 h-2 rounded-full" style="width: {{percent_complete}}%"></div>
+        </div>
+      </div>
+      <!-- ===== PROGRESS BAR END ===== -->
 
-  <div class="space-y-4">
-    <div class="flex items-center space-x-3">
-      <input
-        type="checkbox"
-        class="w-4 h-4 rounded border-gray-500 bg-transparent"
-      />
-      <span class="text-gray-300">Finish the reporting module</span>
-    </div>
+      <!-- ===== TASKS LIST START ===== -->
+      <div class="space-y-4">
+        {% for task in tasks %}
+          <div class="flex items-center space-x-3">
+            <form action="{% url 'toggle_complete' task.id %}" method="POST" class="flex items-center space-x-3 w-full">
+              {% csrf_token %}
+              <input
+                type="checkbox"
+                class="w-4 h-4 rounded border-gray-500 bg-transparent text-blue-500 focus:ring-blue-500"
+                {% if task.completed %}checked{% endif %}
+                onChange="this.form.submit()"
+              />
+              <span class="text-gray-300 {% if task.completed %}line-through text-gray-500{% endif %}">
+                {{ task.title }}
+              </span>
+            </form>
+          </div>
+        {% endfor %}
+      </div>
+      <!-- ===== TASKS LIST END ===== -->
 
-    <h3 class="text-lg font-medium mt-6 mb-4">To Do</h3>
-
-    <div class="flex items-center space-x-3">
-      <input
-        type="checkbox"
-        class="w-4 h-4 rounded border-gray-500 bg-transparent"
-      />
-      <span class="text-gray-300">Refactor user authentication</span>
-    </div>
-
-    <div class="flex items-center space-x-3">
-      <input
-        type="checkbox"
-        class="w-4 h-4 rounded border-gray-500 bg-transparent"
-      />
-      <span class="text-gray-300">Write unit tests</span>
-    </div>
+    {% else %}
+      <!-- ===== EMPTY STATE START ===== -->
+      <p class="text-gray-400">No tasks available.</p>
+      <!-- ===== EMPTY STATE END ===== -->
+    {% endif %}
   </div>
 </div>
+<!-- ===== GOALS AND TASKS SECTION END ===== -->

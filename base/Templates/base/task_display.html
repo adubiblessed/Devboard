@@ -11,10 +11,10 @@
         <div class="mb-6">
             <div class="flex items-center justify-between mb-2">
                 <span class="font-medium text-white">April 2024 Goals</span>
-                <span class="text-gray-400">50%</span>
+                <span class="text-gray-400">{{percent_complete}}%</span>
             </div>
             <div class="w-full bg-gray-700 rounded-full h-2">
-                <div class="bg-blue-500 h-2 rounded-full" style="width: 50%"></div>
+                <div class="bg-blue-500 h-2 rounded-full" style="width: {{percent_complete}}%"></div>
             </div>
         </div>
         <!-- ===== PROGRESS BAR END ===== -->
@@ -42,6 +42,11 @@
         <p class="text-gray-400">No tasks available.</p>
         <!-- ===== EMPTY STATE END ===== -->
     {% endif %}
+    </div>
+    <div class="flex justify-end mt-6">
+        <a href="{% url 'tasks' %}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors duration-200">
+            Create New Task
+        </a>
     </div>
 </div>
 <!-- ===== GOALS AND TASKS SECTION END ===== -->

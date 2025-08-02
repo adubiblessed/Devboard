@@ -1,14 +1,60 @@
-{% extend 'base/tasks.html'%}
+{% extends 'base/main.html' %}
 
-<form method="POST" action="{% url 'tasks' %}">
-    {% csrf_token %}
-    <div class="mb-4">
-        <label for="title" class="block text-sm font-medium text-gray-300">Task Title</label>
-        <input type="text" name="title" id="title" class="mt-1 block w-full p-2 bg-card-bg border border-border-gray rounded-md focus:ring-blue-500 focus:border-blue-500" required>
+{% block content %}
+<!-- ===== TASK FORM CONTAINER START ===== -->
+<div class="container mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-10">
+    <div class="bg-card-bg rounded-xl shadow-md p-6 sm:p-8 border border-border-gray">
+        
+        <!-- ===== FORM HEADER ===== -->
+        <h2 class="text-2xl font-semibold text-white mb-6">Create New Task</h2>
+
+        <!-- ===== FORM START ===== -->
+        <form method="POST" action="{% url 'tasks' %}" class="space-y-6">
+            {% csrf_token %}
+
+            <!-- Task Title Field -->
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-300 mb-1">Task Title</label>
+                <input 
+                    type="text" 
+                    name="title" 
+                    id="title" 
+                    class="block w-full rounded-md bg-dark-bg border border-border-gray p-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base" 
+                    placeholder="e.g. Build the login feature" 
+                    required
+                >
+            </div>
+
+            <!-- Task Description Field -->
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-300 mb-1">Description</label>
+                <textarea 
+                    name="description" 
+                    id="description" 
+                    rows="4" 
+                    class="block w-full rounded-md bg-dark-bg border border-border-gray p-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base resize-none"
+                    placeholder="Add more details about the task (optional)..."
+                ></textarea>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
+                <button 
+                    type="submit" 
+                    class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors duration-200"
+                >
+                    Create Task
+                </button>
+
+                <a href="{% url 'tasks_display' %}" 
+                   class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium rounded-md transition-colors duration-200">
+                    View All Tasks
+                </a>
+            </div>
+        </form>
+        <!-- ===== FORM END ===== -->
+        
     </div>
-    <div class="mb-4">
-        <label for="description" class="block text-sm font-medium text-gray-300">Description</label>
-        <textarea name="description" id="description" rows="3" class="mt-1 block w-full p-2 bg-card-bg border border-border-gray rounded-md focus:ring-blue-500 focus:border-blue-500"></textarea>
-    </div>
-    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md">Create Task</button>
-</form>
+</div>
+<!-- ===== TASK FORM CONTAINER END ===== -->
+{% endblock content %}

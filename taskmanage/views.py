@@ -4,7 +4,14 @@ from .models import Task
 
 def task_display(request):
     tasks = Task.objects.all()
-    return render(request, 'base/task_display.html', {'tasks': tasks})
+    total_tasks = tasks.count()
+    completed_tasks = tasks.filter(completed=True).count()
+
+    if total_tasks == 0:
+        percent_complete = 0
+    else:
+        percent_complete = int((completed_tasks / total_tasks) * 100)
+    return render(request, 'base/task_display.html', {'tasks': tasks, 'percent_complete': percent_complete})
 
 def task_create(request):
     if request.method == 'POST':
