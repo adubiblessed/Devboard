@@ -1,20 +1,49 @@
-{% extends 'base/main.html' %}
+{% extends 'base/main.html' %} 
 
 {% block content %}
+<!-- ===== GOALS AND TASKS SECTION START ===== -->
+<div class="container mx-auto max-w-4xl px-6 py-8">
+    <div class="bg-card-bg rounded-lg p-6 mx-4 my-8">
+    {% if tasks %}
+        <h2 class="text-xl font-semibold mb-6 text-white">Goals & Tasks</h2>
 
-
-{% if tasks %}
-    <h2>Tasks</h2>
-    {% for task in tasks %}
-        <div>
-            <p>Title: {{ task.title }}</p>
-            <p>Description: {{ task.description }}</p>
-            <p>Status: {{ task.status }}</p>
-            <p>Created At: {{ task.created_at }}</p>
+        <!-- ===== PROGRESS BAR START ===== -->
+        <div class="mb-6">
+            <div class="flex items-center justify-between mb-2">
+                <span class="font-medium text-white">April 2024 Goals</span>
+                <span class="text-gray-400">50%</span>
+            </div>
+            <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-blue-500 h-2 rounded-full" style="width: 50%"></div>
+            </div>
         </div>
-    {% endfor %}
-{% else %}
-    <p>No tasks available.</p>
-{% endif %}
+        <!-- ===== PROGRESS BAR END ===== -->
 
-{% endblock content %}
+        <!-- ===== TASKS LIST START ===== -->
+        <div class="space-y-4">
+            {% for task in tasks %}
+                <div class="flex items-center space-x-3 {% if task.completed %}line-through text-gray-500{% endif %} cursor-pointer">
+                    <form action="{% url 'toggle_complete' task.id %}" method="POST">
+                        {% csrf_token %}
+                            <input
+                                type="checkbox"
+                                class="w-4 h-4 rounded border-gray-500 bg-transparent text-blue-500 focus:ring-blue-500"
+                                {% if task.completed %}checked{% endif %} onChange="this.form.submit()"
+                            />
+                            <span class="text-gray-300 {% if task.completed %}line-through text-gray-500{% endif %} cursor-pointer ">{{ task.title }}</span>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- ===== TASKS LIST END ===== -->
+        
+    {% else %}
+        <!-- ===== EMPTY STATE START ===== -->
+        <p class="text-gray-400">No tasks available.</p>
+        <!-- ===== EMPTY STATE END ===== -->
+    {% endif %}
+    </div>
+</div>
+<!-- ===== GOALS AND TASKS SECTION END ===== -->
+
+{% endblock content%}
