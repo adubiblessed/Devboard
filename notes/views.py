@@ -5,7 +5,7 @@ from .forms import NoteForm
 
 # Create your views here.
 def notes_display(request):
-    notes =  Note.objects.all()
+    notes =  Note.objects.order_by('-created_at')
     
     return render(request, 'base/notes_display.html', { 'notes':notes })
 

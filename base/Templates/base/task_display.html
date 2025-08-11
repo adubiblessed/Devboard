@@ -36,17 +36,21 @@
             {% endfor %}
         </div>
         <!-- ===== TASKS LIST END ===== -->
+        <div class="flex justify-end mt-6">
+            <a href="{% url 'tasks' %}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors duration-200">
+                Create New Task
+            </a>
+            <a href="{% url 'home' %}" class="ml-4 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md font-medium transition-colors duration-200">
+                Go Back Home
+            </a>
+        </div>
+
         
     {% else %}
         <!-- ===== EMPTY STATE START ===== -->
         <p class="text-gray-400">No tasks available.</p>
         <!-- ===== EMPTY STATE END ===== -->
     {% endif %}
-    </div>
-    <div class="flex justify-end mt-6">
-        <a href="{% url 'tasks' %}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors duration-200">
-            Create New Task
-        </a>
     </div>
 </div>
 <!-- ===== GOALS AND TASKS SECTION END ===== -->

@@ -9,7 +9,7 @@ from notes.models import Note
 
 def home (request): 
     tasks = Task.objects.all()
-    notes = Note.objects.all()
+    notes = Note.objects.order_by('-created_at')[:3]
     print(notes)
     total_tasks = tasks.count()
     completed_tasks = tasks.filter(completed=True).count()
