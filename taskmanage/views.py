@@ -17,6 +17,8 @@ def task_create(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
             form.save()
             return redirect('tasks_display')  
     else:

@@ -1,50 +1,63 @@
 <!-- ===== GOALS AND TASKS SECTION START ===== -->
-<div class="container mx-auto max-w-4xl ">
-  <div class="bg-card-bg rounded-lg p-6 ">
+<div class="container mx-auto max-w-4xl">
+  <div class="bg-card-bg rounded-lg p-6">
+    <h2 class="text-xl font-semibold mb-6 text-white">Goals & Tasks</h2>
+
+    <!-- ===== PROGRESS BAR START ===== -->
     {% if tasks %}
-      <h2 class="text-xl font-semibold mb-6 text-white">Goals & Tasks</h2>
-
-      <!-- ===== PROGRESS BAR START ===== -->
-      <div class="mb-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="font-medium text-white">April 2024 Goals</span>
-          <span class="text-gray-400">{{percent_complete}}%</span>
-        </div>
-        <div class="w-full bg-gray-700 rounded-full h-2">
-          <div class="bg-blue-500 h-2 rounded-full" style="width: {{percent_complete}}%"></div>
-        </div>
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-2">
+        <span class="font-medium text-white">April 2024 Goals</span>
+        <span class="text-gray-400">{{ percent_complete }}%</span>
       </div>
-      <!-- ===== PROGRESS BAR END ===== -->
-
-      <!-- ===== TASKS LIST START ===== -->
-      <div class="space-y-4">
-        {% for task in tasks %}
-          <div class="flex items-center space-x-3">
-            <form action="{% url 'toggle_complete' task.id %}" method="POST" class="flex items-center space-x-3 w-full">
-              {% csrf_token %}
-              <input
-                type="checkbox"
-                class="w-4 h-4 rounded border-gray-500 bg-transparent text-blue-500 focus:ring-blue-500"
-                {% if task.completed %}checked{% endif %}
-                onChange="this.form.submit()"
-              />
-              <span class="text-gray-300 {% if task.completed %}line-through text-gray-500{% endif %}">
-                {{ task.title }}
-              </span>
-            </form>
-          </div>
-        {% endfor %}
-
-        <div class="mt-4">
-          <a href="{% url 'tasks' %}" class="text-blue-400 hover:text-blue-300 text-sm">Add New Task</a>
-        </div>
+      <div class="w-full bg-gray-700 rounded-full h-2">
+        <div
+          class="bg-blue-500 h-2 rounded-full"
+          style="width: {{ percent_complete }}%"
+        ></div>
       </div>
-      <!-- ===== TASKS LIST END ===== -->
+    </div>
+    <!-- ===== PROGRESS BAR END ===== -->
+
+    <!-- ===== TASKS LIST START ===== -->
+    <div class="space-y-4">
+      {% for task in tasks %}
+      <div class="flex items-center space-x-3">
+        <form
+          action="{% url 'toggle_complete' task.id %}"
+          method="POST"
+          class="flex items-center space-x-3 w-full"
+        >
+          {% csrf_token %}
+          <input
+            type="checkbox"
+            class="w-4 h-4 rounded border-gray-500 bg-transparent text-blue-500 focus:ring-blue-500"
+            {% if task.completed %}checked{% endif %}
+            onChange="this.form.submit()"
+          />
+          <span
+            class="text-gray-300 {% if task.completed %}line-through text-gray-500{% endif %}"
+          >
+            {{ task.title }}
+          </span>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- ===== TASKS LIST END ===== -->
 
     {% else %}
-      <!-- ===== EMPTY STATE START ===== -->
-      <p class="text-gray-400">No tasks available.</p>
-      <!-- ===== EMPTY STATE END ===== -->
+    <!-- ===== EMPTY STATE START ===== -->
+    <div class="mt-4">
+      <a
+        href="{% url 'tasks' %}"
+        class="text-blue-400 hover:text-blue-300 text-sm"
+      >
+        Add New Task
+      </a>
+    </div>
+    <p class="text-gray-400">No tasks available.</p>
+    <!-- ===== EMPTY STATE END ===== -->
     {% endif %}
   </div>
 </div>

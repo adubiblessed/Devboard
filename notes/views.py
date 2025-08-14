@@ -13,6 +13,8 @@ def note_create(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
+            note = form.save(commit=False)
+            note.user = request.user  # Set the user to the currently logged-in user
             form.save()
             return redirect('notes_display')  
     else:

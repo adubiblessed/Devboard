@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'base',
     'taskmanage',
     'notes',
+    'streak',
 ]
 
 MIDDLEWARE = [
